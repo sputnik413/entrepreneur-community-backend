@@ -1,0 +1,18 @@
+import { MigrationInterface, QueryRunner } from 'typeorm';
+
+export class AddEmailVerifiedAtToUsers1787035759001 implements MigrationInterface {
+  name = 'AddEmailVerifiedAtToUsers1787035759001';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`
+      ALTER TABLE "users"
+      ADD "email_verified_at" TIMESTAMP WITH TIME ZONE
+    `);
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      'ALTER TABLE "users" DROP COLUMN "email_verified_at"',
+    );
+  }
+}
